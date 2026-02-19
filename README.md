@@ -1,86 +1,85 @@
-# React + TypeScript + Vite
+# Yasin Walum Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern single-page portfolio built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19
+- TypeScript
+- Vite
+- Zustand (window/navigation state)
+- Motion (animations)
+- React Hook Form + Zod (contact form validation)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Desktop-inspired portfolio layout with About, Projects, and Contact windows
+- Responsive navigation with mobile drawer
+- Contact form integration via FormSubmit endpoint
+- Local optimized font loading (`woff2`)
+- SEO-ready metadata:
+  - Open Graph + Twitter cards
+  - JSON-LD (`Person`, `Organization`, `WebSite`)
+  - `robots.txt` and `sitemap.xml` generation
+  - SEO QA validation script for CI
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Install dependencies
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Configure environment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Copy `.env.example` to `.env` and set values:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_SITE_URL=https://your-domain.com
+
+VITE_CONTACT_EMAIL=you@example.com
+VITE_CONTACT_PHONE_DISPLAY=+256 700 000000
+VITE_CONTACT_WHATSAPP=256700000000
+VITE_CONTACT_LOCATION_LABEL=Kampala, Uganda
+VITE_CONTACT_LOCATION_QUERY=Kampala, Uganda
+VITE_CONTACT_FORM_ENDPOINT=https://formsubmit.co/ajax/you@example.com
 ```
 
-## Contact Window Config
+### 3. Run development server
 
-Contact links and form recipient are configured from env vars.
+```bash
+pnpm dev
+```
 
-1. Copy `.env.example` to `.env`
-2. Set these values:
-   - `VITE_CONTACT_EMAIL`
-   - `VITE_CONTACT_PHONE_DISPLAY`
-   - `VITE_CONTACT_WHATSAPP`
-   - `VITE_CONTACT_LOCATION_LABEL`
-   - `VITE_CONTACT_LOCATION_QUERY`
-   - `VITE_CONTACT_FORM_ENDPOINT`
+## Scripts
+
+- `pnpm dev` - start local dev server
+- `pnpm lint` - run ESLint
+- `pnpm seo:generate` - generate `public/robots.txt` and `public/sitemap.xml`
+- `pnpm build` - generate SEO files, type-check, and build production assets
+- `pnpm seo:qa` - validate SEO-critical output in `dist/`
+- `pnpm ci:seo` - run build + SEO QA (CI-friendly)
+- `pnpm preview` - preview production build locally
+
+## SEO Notes
+
+- `VITE_SITE_URL` is required for canonical URLs, OG URL, JSON-LD URL, sitemap, and robots sitemap path.
+- If `VITE_SITE_URL` is missing/invalid, SEO generation falls back to `https://example.com` and logs a warning.
+- Open Graph image is served from Cloudinary:
+  - `https://res.cloudinary.com/dkdteb9m5/image/upload/v1739381052/qnsyneuzwomdka0oqvws.jpg`
+
+## Deployment
+
+1. Set production env vars (especially `VITE_SITE_URL`) in your hosting platform.
+2. Run:
+
+```bash
+pnpm ci:seo
+```
+
+3. Deploy the generated `dist/` output.
+
+## License
+
+Personal portfolio project. Update license terms as needed.
