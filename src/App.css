@@ -6,7 +6,7 @@
     url("./assets/fonts/cera-pro/CeraProRegular.woff2") format("woff2");
   font-style: normal;
   font-weight: 400;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
@@ -17,7 +17,7 @@
     url("./assets/fonts/cera-pro/CeraProMedium.woff2") format("woff2");
   font-style: normal;
   font-weight: 500;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
@@ -28,7 +28,7 @@
     url("./assets/fonts/cera-pro/CeraProBold.woff2") format("woff2");
   font-style: normal;
   font-weight: 700;
-  font-display: optional;
+  font-display: swap;
 }
 
 @font-face {
@@ -39,7 +39,7 @@
     url("./assets/fonts/cera-pro/CeraProRegularItalic.woff2") format("woff2");
   font-style: italic;
   font-weight: 400;
-  font-display: optional;
+  font-display: swap;
 }
 
 :root {
