@@ -1,7 +1,7 @@
-import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
-import { motion } from 'motion/react';
-import { Button } from './ui/Button';
-import { Icon } from './ui/Icon';
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
+import { motion } from "motion/react";
+import { Button } from "./ui/Button";
+import { Icon } from "./ui/Icon";
 
 type HeroContentProps = {
   onExploreClick?: () => void;
@@ -9,22 +9,9 @@ type HeroContentProps = {
 
 function IconCluster() {
   return (
-    <motion.div
-      className="icon-cluster"
-      aria-hidden
-      initial={{ opacity: 0, scale: 0.9, y: 8 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{
-        opacity: { duration: 0.44, delay: 0.18, ease: 'easeOut' },
-        scale: { type: 'spring', stiffness: 220, damping: 20, delay: 0.18 },
-        y: { type: 'spring', stiffness: 220, damping: 20, delay: 0.18 },
-      }}
-    >
-      <span className="cluster-dot cluster-dot-accent" />
-      <span className="cluster-dot" />
-      <span className="cluster-dot" />
-      <span className="cluster-dot" />
-    </motion.div>
+    <div className="icon-cluster ">
+      <img src="/android-chrome-192x192.png" alt="Yasin Walum image" />
+    </div>
   );
 }
 
@@ -50,7 +37,7 @@ export function HeroContent({ onExploreClick }: HeroContentProps) {
           hidden: { opacity: 0, y: 14 },
           visible: { opacity: 1, y: 0 },
         }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
       >
         Design, build, ship
         <span>build bold web experiences</span>
@@ -60,7 +47,7 @@ export function HeroContent({ onExploreClick }: HeroContentProps) {
           hidden: { opacity: 0, y: 10 },
           visible: { opacity: 1, y: 0 },
         }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
       >
         Frontend developer in Kampala. Fast. Clean. Accessible.
       </motion.p>
@@ -69,7 +56,7 @@ export function HeroContent({ onExploreClick }: HeroContentProps) {
           hidden: { opacity: 0, y: 8 },
           visible: { opacity: 1, y: 0 },
         }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.98 }}
       >
