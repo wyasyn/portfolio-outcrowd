@@ -539,7 +539,6 @@
   );
   box-shadow: 0 20px 48px rgb(0 0 0 / 20%);
   overflow: hidden;
-  resize: both;
   pointer-events: auto;
   touch-action: none;
   backdrop-filter: blur(12px) saturate(135%);
@@ -569,7 +568,6 @@
 
 .workspace-window.is-minimized {
   height: 34px !important;
-  resize: none;
 }
 
 .workspace-window-bar {
@@ -585,7 +583,11 @@
     rgb(241 243 247 / 84%) 0%,
     rgb(232 235 242 / 72%) 100%
   );
-  cursor: move;
+  cursor: grab;
+}
+
+.workspace-window-bar:active {
+  cursor: grabbing;
 }
 
 .workspace-window-controls {
@@ -641,6 +643,77 @@
   margin: 0;
   color: #3f4657;
   font: 500 0.92rem/1.3 var(--font-sans);
+}
+
+.workspace-resize-handle {
+  position: absolute;
+  z-index: 5;
+}
+
+.workspace-resize-handle-n,
+.workspace-resize-handle-s {
+  left: 14px;
+  right: 14px;
+  height: 10px;
+}
+
+.workspace-resize-handle-n {
+  top: -5px;
+  cursor: ns-resize;
+}
+
+.workspace-resize-handle-s {
+  bottom: -5px;
+  cursor: ns-resize;
+}
+
+.workspace-resize-handle-e,
+.workspace-resize-handle-w {
+  top: 14px;
+  bottom: 14px;
+  width: 10px;
+}
+
+.workspace-resize-handle-e {
+  right: -5px;
+  cursor: ew-resize;
+}
+
+.workspace-resize-handle-w {
+  left: -5px;
+  cursor: ew-resize;
+}
+
+.workspace-resize-handle-ne,
+.workspace-resize-handle-nw,
+.workspace-resize-handle-se,
+.workspace-resize-handle-sw {
+  width: 14px;
+  height: 14px;
+}
+
+.workspace-resize-handle-ne {
+  top: -6px;
+  right: -6px;
+  cursor: nesw-resize;
+}
+
+.workspace-resize-handle-nw {
+  top: -6px;
+  left: -6px;
+  cursor: nwse-resize;
+}
+
+.workspace-resize-handle-se {
+  right: -6px;
+  bottom: -6px;
+  cursor: nwse-resize;
+}
+
+.workspace-resize-handle-sw {
+  bottom: -6px;
+  left: -6px;
+  cursor: nesw-resize;
 }
 
 .about-window-layout {

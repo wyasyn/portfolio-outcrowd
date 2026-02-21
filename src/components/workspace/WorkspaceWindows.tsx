@@ -24,6 +24,7 @@ export function WorkspaceWindows() {
     bringToFront,
     toggleMinimize,
     toggleMaximize,
+    updateWindowRect,
   } = useWorkspaceStore(
     useShallow((state) => ({
       intent: state.intent,
@@ -33,6 +34,7 @@ export function WorkspaceWindows() {
       bringToFront: state.bringToFront,
       toggleMinimize: state.toggleMinimize,
       toggleMaximize: state.toggleMaximize,
+      updateWindowRect: state.updateWindowRect,
     })),
   );
 
@@ -64,6 +66,16 @@ export function WorkspaceWindows() {
     });
   };
 
+  const onUpdateRect = (id: number, rect: { width?: number; height?: number; left?: number; top?: number }) => {
+    const layer = layerRef.current;
+    if (!layer) return;
+    const bounds = layer.getBoundingClientRect();
+    updateWindowRect(id, rect, {
+      width: bounds.width,
+      height: bounds.height,
+    });
+  };
+
   const renderedWindows = sortedWindows.map((windowItem) => (
     <WorkspaceWindowFrame
       key={windowItem.id}
@@ -73,6 +85,7 @@ export function WorkspaceWindows() {
       onClose={closeWindow}
       onMinimize={toggleMinimize}
       onMaximize={onToggleMaximize}
+      onUpdateRect={onUpdateRect}
     >
       {renderWindowContent(windowItem.kind)}
     </WorkspaceWindowFrame>

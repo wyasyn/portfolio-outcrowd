@@ -15,10 +15,21 @@ type WorkspaceState = {
   bringToFront: (id: number) => void;
   toggleMinimize: (id: number) => void;
   toggleMaximize: (id: number, bounds: LayerBounds) => void;
+  updateWindowRect: (
+    id: number,
+    rect: Partial<Pick<AppWindow, 'width' | 'height' | 'left' | 'top'>>,
+    bounds: LayerBounds,
+  ) => void;
 };
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
+}
+
+function getWindowMinimums(kind: WindowKind) {
+  if (kind === 'about') return { width: 340, height: 240 };
+  if (kind === 'projects') return { width: 360, height: 300 };
+  return { width: 360, height: 320 };
 }
 
 export const useWorkspaceStore = create<WorkspaceState>((set) => ({
@@ -170,5 +181,35 @@ export const useWorkspaceStore = create<WorkspaceState>((set) => ({
         }),
       };
     });
+  },
+
+  updateWindowRect: (id, rect, bounds) => {
+    set((state) => ({
+      windows: state.windows.map((windowItem) => {
+        if (windowItem.id !== id || windowItem.maximized) return windowItem;
+
+        const minSize = getWindowMinimums(windowItem.kind);
+        const nextWidth = clamp(
+          rect.width ?? windowItem.width,
+          minSize.width,
+          Math.max(minSize.width, bounds.width - 24),
+        );
+        const nextHeight = clamp(
+          rect.height ?? windowItem.height,
+          minSize.height,
+          Math.max(minSize.height, bounds.height - 24),
+        );
+        const nextLeft = clamp(rect.left ?? windowItem.left, 12, Math.max(12, bounds.width - nextWidth - 12));
+        const nextTop = clamp(rect.top ?? windowItem.top, 12, Math.max(12, bounds.height - nextHeight - 12));
+
+        return {
+          ...windowItem,
+          width: nextWidth,
+          height: nextHeight,
+          left: nextLeft,
+          top: nextTop,
+        };
+      }),
+    }));
   },
 }));
