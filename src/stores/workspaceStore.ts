@@ -87,8 +87,12 @@ export const useWorkspaceStore = create<WorkspaceState>((set) => ({
             : Math.min(390, Math.max(240, bounds.height * 0.52));
 
       const index = state.windows.length;
-      const left = clamp(42 + index * 24, 12, Math.max(12, bounds.width - width - 12));
-      const top = clamp(60 + index * 18, 12, Math.max(12, bounds.height - height - 12));
+      const centerLeft = (bounds.width - width) / 2;
+      const centerTop = (bounds.height - height) / 2;
+      const cascadeX = index * 18;
+      const cascadeY = index * 14;
+      const left = clamp(centerLeft + cascadeX, 12, Math.max(12, bounds.width - width - 12));
+      const top = clamp(centerTop + cascadeY, 12, Math.max(12, bounds.height - height - 12));
       const nextZ = state.zIndex + 1;
 
       const newWindow: AppWindow = {
