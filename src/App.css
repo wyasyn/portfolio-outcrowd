@@ -1545,6 +1545,12 @@
   box-shadow: 0 0 0 2px rgb(66 72 88 / 25%);
 }
 
+[data-theme="dark"] .menu-trigger {
+  background: #2c2f35;
+  border-color: #3c4048;
+  color: #e6e9ee;
+}
+
 [data-theme="dark"] .btn-link {
   color: #e6e9ee;
 }
