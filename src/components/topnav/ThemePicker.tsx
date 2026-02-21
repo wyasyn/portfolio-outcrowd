@@ -1,6 +1,6 @@
 import { ArrowDown01Icon, ArrowUp01Icon, Tick02Icon } from '@hugeicons/core-free-icons';
 import { motion } from 'motion/react';
-import type { RefObject } from 'react';
+import { useId, type RefObject } from 'react';
 import { THEME_OPTIONS } from '../../data/navigationData';
 import type { ThemeMode } from '../../stores/navStore';
 import { Icon } from '../ui/Icon';
@@ -20,6 +20,9 @@ export function ThemePicker({
   onToggle,
   onSelect,
 }: ThemePickerProps) {
+  const themePickerId = useId();
+  const triggerId = `${themePickerId}-trigger`;
+  const panelId = `${themePickerId}-panel`;
   const activeThemeOption = THEME_OPTIONS.find((option) => option.value === themeMode) ?? THEME_OPTIONS[2];
 
   return (
@@ -31,6 +34,9 @@ export function ThemePicker({
           className="theme-trigger is-open"
           aria-label="Theme mode"
           aria-expanded="true"
+          aria-haspopup="listbox"
+          aria-controls={panelId}
+          id={triggerId}
           onClick={onToggle}
         >
           <span className="theme-trigger-value">
@@ -47,6 +53,9 @@ export function ThemePicker({
           className="theme-trigger"
           aria-label="Theme mode"
           aria-expanded="false"
+          aria-haspopup="listbox"
+          aria-controls={panelId}
+          id={triggerId}
           onClick={onToggle}
         >
           <span className="theme-trigger-value">
@@ -62,6 +71,9 @@ export function ThemePicker({
       {isThemeOpen ? (
         <motion.div
           className="theme-panel"
+          id={panelId}
+          role="listbox"
+          aria-labelledby={triggerId}
           initial={{ opacity: 0, y: -6, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -4, scale: 0.98 }}
@@ -71,6 +83,8 @@ export function ThemePicker({
             <button
               key={option.value}
               type="button"
+              role="option"
+              aria-selected={themeMode === option.value}
               className={`theme-option ${themeMode === option.value ? 'is-selected' : ''}`}
               onClick={() => onSelect(option.value)}
             >

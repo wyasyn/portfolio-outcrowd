@@ -80,6 +80,12 @@ pnpm ci:seo
 
 3. Deploy the generated `dist/` output.
 
+### Security headers
+
+- `public/_headers` is included for Netlify-style static hosting.
+- `vercel.json` includes the equivalent headers for Vercel.
+- For best Lighthouse Best Practices score, add a strict `Content-Security-Policy` at your host level using nonces or hashes for inline JSON-LD scripts.
+
 ## License
 
 Personal portfolio project. Update license terms as needed.

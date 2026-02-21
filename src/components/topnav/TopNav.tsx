@@ -102,6 +102,17 @@ export function TopNav({ items, brandName, ctaLabel, onItemSelect, onCtaClick }:
     };
   }, [closeMobileNav]);
 
+  useEffect(() => {
+    if (!isThemeOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeTheme();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isThemeOpen, closeTheme]);
+
   return (
     <motion.header
       className="top-nav"
@@ -120,6 +131,7 @@ export function TopNav({ items, brandName, ctaLabel, onItemSelect, onCtaClick }:
             type="button"
             key={item}
             className={item.toLowerCase() === activeWindowKind ? 'is-active' : undefined}
+            aria-pressed={item.toLowerCase() === activeWindowKind}
             whileHover={{ scale: 1.03 }}
             transition={{ type: 'spring', stiffness: 420, damping: 26 }}
             onClick={() => onItemSelect?.(item)}

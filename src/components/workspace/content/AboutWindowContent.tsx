@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type KeyboardEvent } from 'react';
 import { ABOUT_TABS, SOCIAL_LINKS, type AboutTab, type SocialKey } from '../../../data/workspaceData';
 import { SocialIcon } from './WorkspaceContentIcons';
 
@@ -9,6 +9,20 @@ const ABOUT_AVATAR_SRC_2X =
 
 export function AboutWindowContent() {
   const [activeTab, setActiveTab] = useState<AboutTab>('profile');
+  const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft' && event.key !== 'Home' && event.key !== 'End') {
+      return;
+    }
+    event.preventDefault();
+
+    let targetIndex = index;
+    if (event.key === 'ArrowRight') targetIndex = (index + 1) % ABOUT_TABS.length;
+    if (event.key === 'ArrowLeft') targetIndex = (index - 1 + ABOUT_TABS.length) % ABOUT_TABS.length;
+    if (event.key === 'Home') targetIndex = 0;
+    if (event.key === 'End') targetIndex = ABOUT_TABS.length - 1;
+
+    setActiveTab(ABOUT_TABS[targetIndex].id);
+  };
 
   return (
     <section className="about-window-layout">
@@ -47,31 +61,20 @@ export function AboutWindowContent() {
 
       <div className="about-main">
         <nav className="about-tabs" role="tablist" aria-label="About sections">
-          {ABOUT_TABS.map((tab) => {
+          {ABOUT_TABS.map((tab, index) => {
             const isActive = activeTab === tab.id;
-            if (isActive) {
-              return (
-                <button
-                  key={tab.id}
-                  type="button"
-                  className="about-tab is-active"
-                  role="tab"
-                  aria-selected="true"
-                  onClick={() => setActiveTab(tab.id)}
-                >
-                  {tab.label}
-                </button>
-              );
-            }
-
             return (
               <button
                 key={tab.id}
                 type="button"
-                className="about-tab"
+                className={isActive ? 'about-tab is-active' : 'about-tab'}
                 role="tab"
-                aria-selected="false"
+                id={`about-tab-${tab.id}`}
+                aria-controls={`about-panel-${tab.id}`}
+                aria-selected={isActive}
+                tabIndex={isActive ? 0 : -1}
                 onClick={() => setActiveTab(tab.id)}
+                onKeyDown={(event) => onTabKeyDown(event, index)}
               >
                 {tab.label}
               </button>
@@ -79,7 +82,13 @@ export function AboutWindowContent() {
           })}
         </nav>
 
-        <div className="about-panel">
+        <div
+          className="about-panel"
+          role="tabpanel"
+          id={`about-panel-${activeTab}`}
+          aria-labelledby={`about-tab-${activeTab}`}
+          tabIndex={0}
+        >
           {activeTab === 'profile' && (
             <>
               <h4>About Me</h4>

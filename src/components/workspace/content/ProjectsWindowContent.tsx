@@ -109,6 +109,7 @@ export function ProjectsWindowContent() {
               key={study.title}
               type="button"
               className="project-bento-card"
+              aria-label={`Open case study: ${study.title}`}
               onClick={() => setActiveProjectTitle(study.title)}
             >
               <div className="project-bento-thumb">

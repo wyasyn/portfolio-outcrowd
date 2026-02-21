@@ -1,5 +1,6 @@
 import { Cancel01Icon } from '@hugeicons/core-free-icons';
 import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useRef } from 'react';
 import { THEME_OPTIONS } from '../../data/navigationData';
 import type { ThemeMode } from '../../stores/navStore';
 import { Button } from '../ui/Button';
@@ -29,6 +30,26 @@ export function MobileDrawer({
   onThemeSelect,
   onCtaClick,
 }: MobileDrawerProps) {
+  const drawerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!isMobileNavOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    drawerRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileNavOpen, onClose]);
+
   return (
     <AnimatePresence>
       {isMobileNavOpen ? (
@@ -41,7 +62,13 @@ export function MobileDrawer({
           onClick={onClose}
         >
           <motion.aside
+            id="mobile-navigation-drawer"
+            ref={drawerRef}
             className="mobile-drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
+            tabIndex={-1}
             initial={{ x: -26, opacity: 0.98 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -26, opacity: 0.98 }}

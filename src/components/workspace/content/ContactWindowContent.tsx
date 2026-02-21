@@ -190,46 +190,69 @@ export function ContactWindowContent() {
       <form
         className="contact-form"
         onSubmit={handleSubmit(onSubmit)}
+        aria-describedby={submitError ? "contact-submit-error" : undefined}
         noValidate
       >
-        <label className={`contact-field${errors.name ? " has-error" : ""}`}>
+        <label
+          className={`contact-field${errors.name ? " has-error" : ""}`}
+          htmlFor="contact-name"
+        >
           <span>Name</span>
           <input
+            id="contact-name"
             type="text"
             placeholder="Your Name"
             autoComplete="name"
+            aria-invalid={errors.name ? "true" : "false"}
+            aria-describedby={errors.name ? "contact-name-error" : undefined}
             {...register("name")}
           />
           {errors.name ? (
-            <small className="contact-field-error">{errors.name.message}</small>
+            <small id="contact-name-error" className="contact-field-error">
+              {errors.name.message}
+            </small>
           ) : null}
         </label>
 
-        <label className={`contact-field${errors.email ? " has-error" : ""}`}>
+        <label
+          className={`contact-field${errors.email ? " has-error" : ""}`}
+          htmlFor="contact-email"
+        >
           <span>Email</span>
           <input
+            id="contact-email"
             type="email"
             placeholder="Your Email Address"
             autoComplete="email"
+            aria-invalid={errors.email ? "true" : "false"}
+            aria-describedby={errors.email ? "contact-email-error" : undefined}
             {...register("email")}
           />
           {errors.email ? (
-            <small className="contact-field-error">
+            <small id="contact-email-error" className="contact-field-error">
               {errors.email.message}
             </small>
           ) : null}
         </label>
 
-        <label className={`contact-field${errors.message ? " has-error" : ""}`}>
+        <label
+          className={`contact-field${errors.message ? " has-error" : ""}`}
+          htmlFor="contact-message"
+        >
           <span>Message</span>
           <textarea
+            id="contact-message"
             placeholder="Tell me about your project..."
             rows={8}
             autoComplete="off"
+            aria-invalid={errors.message ? "true" : "false"}
+            aria-describedby={
+              errors.message ? "contact-message-error" : undefined
+            }
             {...register("message")}
           />
           {errors.message ? (
-            <small className="contact-field-error">
+            <small id="contact-message-error" className="contact-field-error">
               {errors.message.message}
             </small>
           ) : null}
@@ -258,7 +281,11 @@ export function ContactWindowContent() {
         </button>
 
         {submitError ? (
-          <p className="contact-submit-message is-error" role="alert">
+          <p
+            id="contact-submit-error"
+            className="contact-submit-message is-error"
+            role="alert"
+          >
             {submitError}
           </p>
         ) : null}
