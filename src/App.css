@@ -2292,8 +2292,9 @@
 
 .sticky-action {
   position: absolute;
-  left: 0.95rem;
+  left: 50%;
   bottom: -1rem;
+  transform: translateX(-50%);
   width: 58px;
   height: 58px;
   border-radius: 18px;
