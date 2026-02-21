@@ -938,14 +938,9 @@
 }
 
 .about-social-icon {
-  width: 1.35rem;
-  height: 1.35rem;
-  border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgb(238 243 253 / 88%);
-  border: 1px solid rgb(205 215 233 / 82%);
 }
 
 .about-social-icon svg {
@@ -1621,11 +1616,6 @@
 
 [data-theme="dark"] .about-social-grid span {
   color: #dbe5f8;
-}
-
-[data-theme="dark"] .about-social-icon {
-  background: rgb(53 61 76 / 82%);
-  border-color: rgb(79 90 111 / 78%);
 }
 
 [data-theme="dark"] .about-social-github {
