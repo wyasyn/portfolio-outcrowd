@@ -9,7 +9,7 @@ type HeroContentProps = {
 
 function IconCluster() {
   return (
-    <div className="icon-cluster ">
+    <div className="icon-cluster hero-avatar-trigger" tabIndex={0}>
       <img
         src="/android-chrome-192x192.png"
         alt="Yasin Walum image"
@@ -18,6 +18,10 @@ function IconCluster() {
         decoding="async"
         fetchPriority="high"
       />
+      <span className="hero-avatar-tooltip" role="tooltip">
+        <strong>Yasim Walum</strong>
+        <small>Frontend developer</small>
+      </span>
     </div>
   );
 }

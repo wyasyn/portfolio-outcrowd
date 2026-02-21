@@ -1739,6 +1739,16 @@
     linear-gradient(180deg, #24272c 0%, #212329 100%);
 }
 
+[data-theme="dark"] .hero-avatar-tooltip {
+  background: #f3f6fc;
+  color: #1c2231;
+  box-shadow: 0 12px 26px rgb(3 6 10 / 30%);
+}
+
+[data-theme="dark"] .hero-avatar-tooltip::after {
+  border-top-color: #f3f6fc;
+}
+
 [data-theme="dark"] .workspace-window {
   border-color: rgb(78 86 103 / 70%);
   background: linear-gradient(
@@ -2202,7 +2212,7 @@
 .icon-cluster {
   width: 100px;
   height: 100px;
-
+  position: relative;
   margin-bottom: 1.9rem;
 }
 
@@ -2210,6 +2220,89 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.hero-avatar-trigger {
+  cursor: default;
+}
+
+.hero-avatar-trigger:focus-visible {
+  outline: 2px solid rgb(60 130 255 / 70%);
+  outline-offset: 7px;
+  border-radius: 16px;
+}
+
+.hero-avatar-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.8rem);
+  transform: translateX(-50%) translateY(8px);
+  min-width: 168px;
+  padding: 0.72rem 0.95rem 0.68rem;
+  border-radius: 16px;
+  background: #191b22;
+  color: #f2f5fb;
+  box-shadow: 0 12px 26px rgb(10 12 17 / 28%);
+  text-align: left;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform-origin: 50% 100%;
+}
+
+.hero-avatar-tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 10px solid #191b22;
+  transform: translateX(-50%);
+}
+
+.hero-avatar-tooltip strong,
+.hero-avatar-tooltip small {
+  display: block;
+}
+
+.hero-avatar-tooltip strong {
+  font: 600 1rem/1.08 var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+.hero-avatar-tooltip small {
+  margin-top: 0.3rem;
+  font: 500 0.79rem/1.16 var(--font-sans);
+  opacity: 0.86;
+}
+
+.hero-avatar-trigger:hover .hero-avatar-tooltip,
+.hero-avatar-trigger:focus-visible .hero-avatar-tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  animation: hero-tooltip-tilt 720ms cubic-bezier(0.21, 0.89, 0.36, 1.05) 1;
+}
+
+@keyframes hero-tooltip-tilt {
+  0% {
+    transform: translateX(-50%) translateY(6px) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-50%) translateY(1px) rotate(-9deg);
+  }
+  52% {
+    transform: translateX(-50%) translateY(0) rotate(8deg);
+  }
+  72% {
+    transform: translateX(-50%) translateY(0) rotate(-4deg);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0) rotate(0deg);
+  }
 }
 
 .hero-content h1 {
