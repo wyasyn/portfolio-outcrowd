@@ -646,6 +646,14 @@
     rgb(255 255 255 / 14%) 0%,
     rgb(255 255 255 / 5%) 100%
   );
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.workspace-window-body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .workspace-window-body p {
@@ -846,6 +854,14 @@
   display: grid;
   align-content: start;
   gap: 0.55rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.about-panel::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 .about-panel h4 {
@@ -976,16 +992,10 @@
   display: grid;
   align-content: start;
   gap: 0.72rem;
+  padding-bottom: 0.75rem;
 }
 
 .projects-intro {
-  border-radius: 11px;
-  border: 1px solid rgb(221 227 237 / 80%);
-  background: linear-gradient(
-    180deg,
-    rgb(248 250 254 / 84%) 0%,
-    rgb(242 246 252 / 68%) 100%
-  );
   padding: 0.82rem;
   display: grid;
   gap: 0.42rem;
@@ -1001,16 +1011,18 @@
   margin: 0;
   color: #4a5367;
   font: 500 0.8rem/1.4 var(--font-sans);
+  max-width: 65ch;
 }
 
-.project-master-detail {
+.project-bento-grid {
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(190px, 250px) 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.62rem;
+  padding-bottom: 1rem;
 }
 
-.project-list {
+.project-bento-card {
   border-radius: 11px;
   border: 1px solid rgb(219 225 236 / 80%);
   background: linear-gradient(
@@ -1019,48 +1031,97 @@
     rgb(243 247 253 / 68%) 100%
   );
   padding: 0.5rem;
-  display: grid;
-  align-content: start;
-  gap: 0.42rem;
-  overflow: auto;
-}
-
-.project-list-item {
-  border: 1px solid transparent;
-  border-radius: 10px;
-  background: transparent;
-  padding: 0.56rem;
   text-align: left;
   display: grid;
-  gap: 0.2rem;
+  gap: 0.52rem;
   cursor: pointer;
   transition:
-    border-color 140ms ease,
-    background-color 140ms ease,
-    transform 140ms ease;
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform 160ms ease;
 }
 
-.project-list-item:hover {
+.project-bento-card:hover {
   border-color: rgb(184 198 223 / 80%);
   background: rgb(241 246 254 / 72%);
   transform: translateY(-1px);
 }
 
-.project-list-item span {
+.project-bento-thumb {
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgb(239 245 255 / 76%) 0%,
+    rgb(228 238 255 / 66%) 100%
+  );
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.project-bento-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-bento-thumb span {
+  color: #325187;
+  font: 700 0.72rem/1.2 var(--font-sans);
+  text-align: center;
+}
+
+.project-bento-meta {
+  display: grid;
+  gap: 0.22rem;
+}
+
+.project-bento-meta span {
   color: #6a7794;
   font: 700 0.62rem/1 var(--font-sans);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.project-list-item strong {
+.project-bento-meta strong {
   color: #2a354b;
   font: 700 0.76rem/1.3 var(--font-sans);
 }
 
-.project-list-item.is-active {
-  border-color: rgb(138 169 232 / 76%);
-  background: rgb(225 236 255 / 76%);
+.project-detail-view {
+  min-height: 0;
+  display: grid;
+  align-content: start;
+  gap: 0.54rem;
+  margin-bottom: 0.9rem;
+}
+
+.project-back-button {
+  width: fit-content;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #2d4578;
+  padding: 0.38rem 0.54rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.36rem;
+  font: 700 0.72rem/1 var(--font-sans);
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.project-back-button svg {
+  flex: 0 0 auto;
+}
+
+.project-back-button:hover {
+  border-color: rgb(147 176 233 / 78%);
+  background: rgb(230 240 255 / 75%);
 }
 
 .project-story-card {
@@ -1072,10 +1133,11 @@
     rgb(243 247 252 / 66%) 100%
   );
   padding: 0.72rem;
+  padding-bottom: 2rem;
   display: grid;
   align-content: start;
   gap: 0.58rem;
-  overflow: auto;
+  overflow: visible;
 }
 
 .project-story-image {
@@ -1449,12 +1511,16 @@
     grid-template-columns: 1fr;
   }
 
-  .project-master-detail {
+  .project-bento-grid {
     grid-template-columns: 1fr;
   }
 
-  .project-list {
-    max-height: 180px;
+  .project-bento-thumb {
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-story-card {
+    overflow: visible;
   }
 
   .contact-window {
@@ -1484,8 +1550,8 @@
 @container workspace-window (max-width: 360px) {
   .about-panel,
   .projects-intro,
-  .project-list,
   .project-story-card,
+  .project-bento-card,
   .contact-side,
   .contact-form {
     padding: 0.68rem;
@@ -1498,6 +1564,15 @@
 
   .project-story-image {
     height: 128px;
+  }
+
+  .project-bento-thumb {
+    aspect-ratio: 16 / 10;
+  }
+
+  .project-back-button {
+    padding: 0.34rem 0.48rem;
+    font-size: 0.68rem;
   }
 
   .contact-card {
@@ -1735,15 +1810,6 @@
   color: #9db1da;
 }
 
-[data-theme="dark"] .projects-intro {
-  border-color: rgb(70 79 95 / 76%);
-  background: linear-gradient(
-    180deg,
-    rgb(44 49 59 / 76%) 0%,
-    rgb(37 42 52 / 66%) 100%
-  );
-}
-
 [data-theme="dark"] .projects-intro h4 {
   color: #edf1f9;
 }
@@ -1761,7 +1827,7 @@
   );
 }
 
-[data-theme="dark"] .project-list {
+[data-theme="dark"] .project-bento-card {
   border-color: rgb(71 81 99 / 76%);
   background: linear-gradient(
     180deg,
@@ -1770,22 +1836,38 @@
   );
 }
 
-[data-theme="dark"] .project-list-item:hover {
+[data-theme="dark"] .project-bento-card:hover {
   border-color: rgb(90 104 127 / 80%);
   background: rgb(50 58 72 / 72%);
 }
 
-[data-theme="dark"] .project-list-item span {
+[data-theme="dark"] .project-bento-thumb {
+  background: linear-gradient(
+    180deg,
+    rgb(48 56 70 / 76%) 0%,
+    rgb(42 49 62 / 68%) 100%
+  );
+}
+
+[data-theme="dark"] .project-bento-thumb span {
+  color: #bdd2ff;
+}
+
+[data-theme="dark"] .project-bento-meta span {
   color: #9db1d8;
 }
 
-[data-theme="dark"] .project-list-item strong {
+[data-theme="dark"] .project-bento-meta strong {
   color: #d8e2f4;
 }
 
-[data-theme="dark"] .project-list-item.is-active {
-  border-color: rgb(114 147 211 / 76%);
-  background: rgb(52 72 111 / 74%);
+[data-theme="dark"] .project-back-button {
+  color: #d8e5ff;
+}
+
+[data-theme="dark"] .project-back-button:hover {
+  border-color: rgb(135 165 226 / 78%);
+  background: rgb(61 84 129 / 66%);
 }
 
 [data-theme="dark"] .project-story-head span {

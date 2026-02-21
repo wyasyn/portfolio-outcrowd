@@ -48,6 +48,7 @@ export type CaseStudy = {
   whatIDid: string;
   stack: string[];
   results: string[];
+  thumbnailUrl?: string;
   imageUrl?: string;
   githubUrl?: string;
   liveUrl?: string;
@@ -74,6 +75,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Improved recommendation clarity with explainable confidence states.",
       "Enabled offline-safe session capture and sync for unstable networks.",
     ],
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=640&q=80",
   },
   {
     title: "Skin Condition Detector + Cosmetic Recommendation Engine",
@@ -89,6 +92,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Google Cloud Run",
       "TypeScript",
     ],
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1555820585-c5ae44394b79?q=80&w=725&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     liveUrl: "https://auroraorganics.com",
     results: [
       "Raised completion rate through a guided step-by-step assessment UI.",
@@ -106,6 +111,8 @@ export const CASE_STUDIES: CaseStudy[] = [
     stack: ["Django", "Next.js", "Google Cloud Run", "OpenCV", "Cloud SQL"],
     githubUrl:
       "https://github.com/yasinwalum/attendance-management-face-recognition",
+    thumbnailUrl:
+      "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=640&q=80",
     results: [
       "Reduced attendance reconciliation errors with automated capture flows.",
       "Provided real-time monitoring and searchable attendance history.",
