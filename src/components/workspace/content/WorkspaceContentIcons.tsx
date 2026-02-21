@@ -1,91 +1,46 @@
+import {
+  ArrowRight01Icon,
+  Call02Icon,
+  GithubIcon,
+  InstagramIcon,
+  Linkedin01Icon,
+  Location01Icon,
+  Mail01Icon,
+  YoutubeIcon,
+} from "@hugeicons/core-free-icons";
 import type { SocialKey } from '../../../data/workspaceData';
+import { Icon } from '../../ui/Icon';
 
 type ContactIconKind = 'email' | 'phone' | 'location' | 'arrow';
 
 export function SocialIcon({ platform }: { platform: SocialKey }) {
   if (platform === 'linkedin') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path
-          fill="currentColor"
-          d="M6.4 8.6a1.9 1.9 0 1 0 0-3.8 1.9 1.9 0 0 0 0 3.8Zm-1.7 2.3h3.3v8.3H4.7v-8.3Zm5.2 0h3.2v1.1h.1c.4-.8 1.4-1.4 2.9-1.4 3.1 0 3.7 2 3.7 4.7v3.9h-3.3v-3.4c0-.8 0-1.9-1.2-1.9s-1.4.9-1.4 1.9v3.4H9.9v-8.3Z"
-        />
-      </svg>
-    );
+    return <Icon icon={Linkedin01Icon} size={16} />;
   }
 
   if (platform === 'github') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path
-          fill="currentColor"
-          d="M12 .8A11.2 11.2 0 0 0 .8 12a11.2 11.2 0 0 0 7.7 10.6c.6.1.8-.2.8-.6v-2.1c-3.1.7-3.8-1.3-3.8-1.3-.5-1.2-1.2-1.6-1.2-1.6-1-.6.1-.6.1-.6 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.6-.8 1.6-.8.1-.7.4-1.2.7-1.5-2.5-.3-5.2-1.2-5.2-5.5 0-1.2.5-2.2 1.2-3-.1-.3-.5-1.4.1-2.9 0 0 1-.3 3.2 1.1a11.2 11.2 0 0 1 5.8 0c2.2-1.4 3.2-1.1 3.2-1.1.6 1.5.2 2.6.1 2.9.8.8 1.2 1.8 1.2 3 0 4.3-2.7 5.2-5.2 5.5.4.3.8 1 .8 2.1V22c0 .4.2.7.8.6A11.2 11.2 0 0 0 23.2 12C23.2 5.8 18.2.8 12 .8Z"
-        />
-      </svg>
-    );
+    return <Icon icon={GithubIcon} size={16} />;
   }
 
   if (platform === 'youtube') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path
-          fill="currentColor"
-          d="M22.3 8.1a2.9 2.9 0 0 0-2-2C18.6 5.6 12 5.6 12 5.6s-6.6 0-8.3.5a2.9 2.9 0 0 0-2 2C1.2 9.8 1.2 12 1.2 12s0 2.2.5 3.9a2.9 2.9 0 0 0 2 2c1.7.5 8.3.5 8.3.5s6.6 0 8.3-.5a2.9 2.9 0 0 0 2-2c.5-1.7.5-3.9.5-3.9s0-2.2-.5-3.9Zm-12.4 6.3V9.6l4.9 2.4-4.9 2.4Z"
-        />
-      </svg>
-    );
+    return <Icon icon={YoutubeIcon} size={16} />;
   }
 
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path
-        fill="currentColor"
-        d="M12 6.7a5.3 5.3 0 1 0 0 10.6 5.3 5.3 0 0 0 0-10.6Zm0 8.8a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm5.8-9a1.2 1.2 0 1 0 0 2.3 1.2 1.2 0 0 0 0-2.3ZM12 2.4c2.6 0 2.9 0 3.9.1 1 .1 1.6.2 2 .4.5.2.9.4 1.3.8.4.4.6.8.8 1.3.2.4.4 1 .4 2 .1 1 .1 1.3.1 3.9s0 2.9-.1 3.9c-.1 1-.2 1.6-.4 2a3.7 3.7 0 0 1-2.1 2.1c-.4.2-1 .4-2 .4-1 .1-1.3.1-3.9.1s-2.9 0-3.9-.1c-1-.1-1.6-.2-2-.4a3.7 3.7 0 0 1-2.1-2.1c-.2-.4-.4-1-.4-2C2.4 14.9 2.4 14.6 2.4 12s0-2.9.1-3.9c.1-1 .2-1.6.4-2 .2-.5.4-.9.8-1.3.4-.4.8-.6 1.3-.8.4-.2 1-.4 2-.4 1-.1 1.3-.1 3.9-.1Zm0 1.8c-2.6 0-2.9 0-3.8.1-.8 0-1.2.2-1.5.3-.4.2-.6.3-.9.6-.3.3-.4.5-.6.9-.1.3-.3.7-.3 1.5-.1.9-.1 1.2-.1 3.8s0 2.9.1 3.8c0 .8.2 1.2.3 1.5.2.4.3.6.6.9.3.3.5.4.9.6.3.1.7.3 1.5.3.9.1 1.2.1 3.8.1s2.9 0 3.8-.1c.8 0 1.2-.2 1.5-.3.4-.2.6-.3.9-.6.3-.3.4-.5.6-.9.1-.3.3-.7.3-1.5.1-.9.1-1.2.1-3.8s0-2.9-.1-3.8c0-.8-.2-1.2-.3-1.5a2 2 0 0 0-.6-.9 2 2 0 0 0-.9-.6c-.3-.1-.7-.3-1.5-.3-.9-.1-1.2-.1-3.8-.1Z"
-      />
-    </svg>
-  );
+  return <Icon icon={InstagramIcon} size={16} />;
 }
 
 export function ContactIcon({ kind }: { kind: ContactIconKind }) {
   if (kind === 'email') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path
-          fill="currentColor"
-          d="M20 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm-.6 2-6.6 4.7a1.4 1.4 0 0 1-1.6 0L4.6 7h14.8ZM4 17V8l6 4.3a3.2 3.2 0 0 0 4 0L20 8v9H4Z"
-        />
-      </svg>
-    );
+    return <Icon icon={Mail01Icon} size={16} />;
   }
 
   if (kind === 'phone') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path
-          fill="currentColor"
-          d="M19.8 15.6c-.8-.6-2.6-1.5-3.5-1.2-.7.2-1.2 1.1-1.6 1.6-.2.2-.4.3-.6.2-1.8-.7-3.9-2.7-4.6-4.6-.1-.2 0-.4.2-.6.5-.4 1.3-.9 1.6-1.6.3-.9-.6-2.7-1.2-3.5-.8-1.1-1.6-.9-2.4 0-.7.7-1.1 1.5-1.1 2.6.1 1.8.8 3.5 1.8 5 1.9 2.8 4.8 5.1 8.1 6.1 1.2.4 2.3.7 3.6.5 1-.2 1.9-.8 2.4-1.7.7-1.1.6-2.1-.7-2.8Z"
-        />
-      </svg>
-    );
+    return <Icon icon={Call02Icon} size={16} />;
   }
 
   if (kind === 'location') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path
-          fill="currentColor"
-          d="M12 2.5A7.5 7.5 0 0 0 4.5 10c0 5.2 5.8 11 7 12.1.3.3.7.3 1 0 1.2-1.1 7-6.9 7-12.1A7.5 7.5 0 0 0 12 2.5Zm0 17.8C10.2 18.4 6.3 13.8 6.3 10a5.7 5.7 0 1 1 11.4 0c0 3.8-3.9 8.4-5.7 10.3Zm0-13.8A3.5 3.5 0 1 0 12 13a3.5 3.5 0 0 0 0-7Zm0 5.2a1.7 1.7 0 1 1 0-3.4 1.7 1.7 0 0 1 0 3.4Z"
-        />
-      </svg>
-    );
+    return <Icon icon={Location01Icon} size={16} />;
   }
 
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path
-        fill="currentColor"
-        d="M7.3 17.7a1 1 0 0 1 0-1.4l4.3-4.3-4.3-4.3a1 1 0 1 1 1.4-1.4l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 0 1-1.4 0Z"
-      />
-    </svg>
-  );
+  return <Icon icon={ArrowRight01Icon} size={16} />;
 }

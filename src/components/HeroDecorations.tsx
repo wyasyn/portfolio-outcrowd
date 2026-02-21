@@ -1,5 +1,6 @@
 import type { ReactNode, RefObject } from 'react';
 import {
+  DartIcon,
   CheckmarkSquare01Icon,
   Clock01Icon,
   PinLocation01Icon,
@@ -27,17 +28,6 @@ type AnimatedCardProps = {
 type HeroDecorationsProps = {
   dragConstraints: RefObject<HTMLElement | null>;
 };
-
-function FlutterLogo() {
-  return (
-    <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden focusable="false">
-      <path d="M4.5 14.1 12.9 5.7h5.3L9.8 14.1z" fill="#47C5FB" />
-      <path d="M9.8 22.2 18.2 13.8h-5.3L4.5 22.2z" fill="#47C5FB" />
-      <path d="m12.9 19.6 2.6-2.6 2.7 2.6-2.7 2.6z" fill="#00569E" />
-      <path d="m9.8 17 3.1-3.1h5.3L15 17l3.2 3.2h-5.3z" fill="#00B5F8" />
-    </svg>
-  );
-}
 
 function AnimatedCard({ children, className, floatY, rotate, delay, dragConstraints }: AnimatedCardProps) {
   return (
@@ -152,7 +142,7 @@ function IntegrationCard({ dragConstraints }: HeroDecorationsProps) {
           <Icon icon={ReactIcon} size={25} />
         </span>
         <span className="integration-tile">
-          <FlutterLogo />
+          <Icon icon={DartIcon} size={25} />
         </span>
         <span className="integration-tile">
           <Icon icon={PythonIcon} size={25} />

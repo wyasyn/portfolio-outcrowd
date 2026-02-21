@@ -122,7 +122,10 @@ export function TopNav({ items, brandName, ctaLabel, onItemSelect, onCtaClick }:
     >
       <a className="brand" href="/">
         <BrandMark />
-        <span>{brandName}</span>
+        <span className="brand-copy">
+          <span className="brand-name">{brandName}</span>
+          <span className="brand-role">Frontend Developer</span>
+        </span>
       </a>
 
       <nav className="top-nav-links" aria-label="Main navigation">
