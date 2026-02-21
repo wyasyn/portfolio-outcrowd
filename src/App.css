@@ -43,7 +43,7 @@
 }
 
 :root {
-  --viewport-h: 100vh;
+  --viewport-h: 100svh;
   --font-sans:
     "Cera Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
@@ -1875,49 +1875,14 @@
 .icon-cluster {
   width: 100px;
   height: 100px;
-  aspect-ratio: 1;
 
   margin-bottom: 1.9rem;
 }
 
 .icon-cluster img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-.cluster-dot {
-  display: block;
-  width: 16px;
-  aspect-ratio: 1;
-  border-radius: 999px;
-  background: #111111;
-  transition: transform 220ms ease;
-}
-
-.cluster-dot-accent {
-  background: var(--blue);
-}
-
-.icon-cluster:hover .cluster-dot {
-  transform: scale(1.22);
-}
-
-.icon-cluster:hover .cluster-dot:nth-child(1) {
-  transform: translate(-2px, -2px) scale(1.22);
-}
-
-.icon-cluster:hover .cluster-dot:nth-child(2) {
-  transform: translate(2px, -2px) scale(1.22);
-}
-
-.icon-cluster:hover .cluster-dot:nth-child(3) {
-  transform: translate(-2px, 2px) scale(1.22);
-}
-
-.icon-cluster:hover .cluster-dot:nth-child(4) {
-  transform: translate(2px, 2px) scale(1.22);
 }
 
 .hero-content h1 {
