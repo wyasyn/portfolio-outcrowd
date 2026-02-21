@@ -132,8 +132,10 @@ export const CONTACT_LOCATION_LABEL =
 export const CONTACT_LOCATION_QUERY =
   import.meta.env.VITE_CONTACT_LOCATION_QUERY || "Kampala, Uganda";
 export const CONTACT_FORM_ENDPOINT =
-  import.meta.env.VITE_CONTACT_FORM_ENDPOINT ||
-  `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+  resolveContactFormEndpoint(
+    import.meta.env.VITE_CONTACT_FORM_ENDPOINT,
+    CONTACT_EMAIL,
+  );
 
 const whatsappDigits = CONTACT_WHATSAPP.replace(/[^\d]/g, "");
 
@@ -142,3 +144,19 @@ export const CONTACT_WHATSAPP_LINK = whatsappDigits
   ? `https://wa.me/${whatsappDigits}`
   : "#";
 export const CONTACT_MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT_LOCATION_QUERY)}`;
+
+function resolveContactFormEndpoint(
+  endpoint: string | undefined,
+  contactEmail: string,
+) {
+  const fallbackEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(contactEmail)}`;
+  if (!endpoint) return fallbackEndpoint;
+
+  try {
+    const resolvedUrl = new URL(endpoint);
+    if (resolvedUrl.protocol !== "https:") return fallbackEndpoint;
+    return resolvedUrl.toString();
+  } catch {
+    return fallbackEndpoint;
+  }
+}

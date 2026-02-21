@@ -26,6 +26,7 @@ const contactFormSchema = z.object({
     .trim()
     .min(10, "Please share at least a short message (10+ characters).")
     .max(1000, "Message is too long. Keep it under 1000 characters."),
+  company: z.string().trim().max(0).optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -34,6 +35,7 @@ export function ContactWindowContent() {
   const [submitError, setSubmitError] = useState("");
   const [successToast, setSuccessToast] = useState("");
   const toastTimerRef = useRef<number | null>(null);
+  const lastSubmitAtRef = useRef(0);
 
   const {
     register,
@@ -60,7 +62,19 @@ export function ContactWindowContent() {
 
   const onSubmit = async (values: ContactFormValues) => {
     setSubmitError("");
+    const now = Date.now();
+    if (now - lastSubmitAtRef.current < 8000) {
+      setSubmitError("Please wait a few seconds before sending another message.");
+      return;
+    }
+    lastSubmitAtRef.current = now;
 
+    if (values.company) {
+      return;
+    }
+
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 10000);
     try {
       const response = await fetch(CONTACT_FORM_ENDPOINT, {
         method: "POST",
@@ -68,6 +82,9 @@ export function ContactWindowContent() {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+        credentials: "omit",
+        referrerPolicy: "strict-origin-when-cross-origin",
+        signal: controller.signal,
         body: JSON.stringify({
           name: values.name,
           email: values.email,
@@ -77,6 +94,7 @@ export function ContactWindowContent() {
           _template: "table",
         }),
       });
+      window.clearTimeout(timeoutId);
 
       if (!response.ok) {
         throw new Error("Request failed");
@@ -94,10 +112,16 @@ export function ContactWindowContent() {
       toastTimerRef.current = window.setTimeout(() => {
         setSuccessToast("");
       }, 3600);
-    } catch {
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") {
+        setSubmitError("Request timed out. Please try again.");
+        return;
+      }
       setSubmitError(
         "Could not send message. Please use email card above to contact me directly.",
       );
+    } finally {
+      window.clearTimeout(timeoutId);
     }
   };
 
@@ -129,7 +153,7 @@ export function ContactWindowContent() {
             className="contact-card"
             href={CONTACT_WHATSAPP_LINK}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <i className="contact-card-icon" aria-hidden="true">
               <ContactIcon kind="phone" />
@@ -147,7 +171,7 @@ export function ContactWindowContent() {
             className="contact-card"
             href={CONTACT_MAPS_LINK}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <i className="contact-card-icon" aria-hidden="true">
               <ContactIcon kind="location" />
@@ -170,7 +194,12 @@ export function ContactWindowContent() {
       >
         <label className={`contact-field${errors.name ? " has-error" : ""}`}>
           <span>Name</span>
-          <input type="text" placeholder="Your Name" {...register("name")} />
+          <input
+            type="text"
+            placeholder="Your Name"
+            autoComplete="name"
+            {...register("name")}
+          />
           {errors.name ? (
             <small className="contact-field-error">{errors.name.message}</small>
           ) : null}
@@ -181,6 +210,7 @@ export function ContactWindowContent() {
           <input
             type="email"
             placeholder="Your Email Address"
+            autoComplete="email"
             {...register("email")}
           />
           {errors.email ? (
@@ -195,6 +225,7 @@ export function ContactWindowContent() {
           <textarea
             placeholder="Tell me about your project..."
             rows={8}
+            autoComplete="off"
             {...register("message")}
           />
           {errors.message ? (
@@ -203,6 +234,15 @@ export function ContactWindowContent() {
             </small>
           ) : null}
         </label>
+
+        <input
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="sr-only"
+          {...register("company")}
+        />
 
         <button
           type="submit"

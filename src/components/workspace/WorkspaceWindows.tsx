@@ -1,11 +1,23 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { useWorkspaceStore } from '../../stores/workspaceStore';
 import type { WindowKind } from '../../types/workspace';
-import { AboutWindowContent } from './content/AboutWindowContent';
-import { ContactWindowContent } from './content/ContactWindowContent';
-import { ProjectsWindowContent } from './content/ProjectsWindowContent';
 import { WorkspaceWindowFrame } from './WorkspaceWindowFrame';
+
+const AboutWindowContent = lazy(async () => {
+  const module = await import('./content/AboutWindowContent');
+  return { default: module.AboutWindowContent };
+});
+
+const ProjectsWindowContent = lazy(async () => {
+  const module = await import('./content/ProjectsWindowContent');
+  return { default: module.ProjectsWindowContent };
+});
+
+const ContactWindowContent = lazy(async () => {
+  const module = await import('./content/ContactWindowContent');
+  return { default: module.ContactWindowContent };
+});
 
 function renderWindowContent(kind: WindowKind) {
   if (kind === 'about') return <AboutWindowContent />;
@@ -87,7 +99,9 @@ export function WorkspaceWindows() {
       onMaximize={onToggleMaximize}
       onUpdateRect={onUpdateRect}
     >
-      {renderWindowContent(windowItem.kind)}
+      <Suspense fallback={<div className="workspace-window-loading" aria-hidden="true" />}>
+        {renderWindowContent(windowItem.kind)}
+      </Suspense>
     </WorkspaceWindowFrame>
   ));
 

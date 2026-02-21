@@ -152,7 +152,12 @@ export function AboutWindowContent() {
               <p>Find me on social platforms and follow my work.</p>
               <div className="about-social-grid">
                 {SOCIAL_LINKS.map((link) => (
-                  <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <span className="about-social-title">
                       <i className={`about-social-icon about-social-${link.key}`} aria-hidden="true">
                         <SocialIcon platform={link.key as SocialKey} />

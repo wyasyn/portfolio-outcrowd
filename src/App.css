@@ -648,12 +648,37 @@
   );
   scrollbar-width: none;
   -ms-overflow-style: none;
+  content-visibility: auto;
+  contain-intrinsic-size: 420px 320px;
 }
 
 .workspace-window-body::-webkit-scrollbar {
   width: 0;
   height: 0;
   display: none;
+}
+
+.workspace-window-loading {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  background: linear-gradient(
+    110deg,
+    rgb(255 255 255 / 10%) 25%,
+    rgb(255 255 255 / 22%) 40%,
+    rgb(255 255 255 / 10%) 55%
+  );
+  background-size: 220% 100%;
+  animation: workspace-loading 1.2s ease-in-out infinite;
+}
+
+@keyframes workspace-loading {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
 }
 
 .workspace-window-body p {

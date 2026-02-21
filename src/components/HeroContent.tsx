@@ -10,7 +10,14 @@ type HeroContentProps = {
 function IconCluster() {
   return (
     <div className="icon-cluster ">
-      <img src="/android-chrome-192x192.png" alt="Yasin Walum image" />
+      <img
+        src="/android-chrome-192x192.png"
+        alt="Yasin Walum image"
+        width={100}
+        height={100}
+        decoding="async"
+        fetchPriority="high"
+      />
     </div>
   );
 }

@@ -41,6 +41,7 @@ export function ProjectsWindowContent() {
                 alt={`${activeProject.title} preview`}
                 className="project-story-image"
                 loading="lazy"
+                decoding="async"
               />
             ) : null}
 
@@ -55,7 +56,7 @@ export function ProjectsWindowContent() {
                   <a
                     href={activeProject.githubUrl}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     GitHub
                   </a>
@@ -64,7 +65,7 @@ export function ProjectsWindowContent() {
                   <a
                     href={activeProject.liveUrl}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     Live Site
                   </a>
@@ -116,6 +117,7 @@ export function ProjectsWindowContent() {
                     src={study.thumbnailUrl ?? study.imageUrl}
                     alt={`${study.title} preview`}
                     loading="lazy"
+                    decoding="async"
                   />
                 ) : (
                   <span>{study.client}</span>
