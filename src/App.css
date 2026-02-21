@@ -2460,6 +2460,7 @@
 .integrations-card p {
   margin: 0 0 0.65rem;
   font: 700 0.8rem/1.2 var(--font-sans);
+  color: #1f1f1f;
 }
 
 .integration-icons {
