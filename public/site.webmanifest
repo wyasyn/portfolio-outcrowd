@@ -1,12 +1,18 @@
 {
-  "name": "Yasin Walum",
-  "short_name": "wyasyn",
-  "description": "Frontend developer portfolio for Yasin Walum.",
+  "name": "Yasin Walum - Developer",
+  "short_name": "Yasin Walum",
+  "description": "Portfolio of Yasin Walum – a frontend and mobile developer based in Kampala, Uganda, specialising in React, Next.js, Flutter, and React Native.",
   "start_url": "/",
   "scope": "/",
+  "id": "/",
   "display": "standalone",
-  "background_color": "#f4f4f4",
-  "theme_color": "#f4f4f4",
+  "orientation": "portrait-primary",
+  "background_color": "#2f80ff",
+  "theme_color": "#2f80ff",
+  "categories": ["portfolio", "productivity", "developer"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -19,6 +25,46 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/mobile.png",
+      "sizes": "390x844",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "View Yasin's featured projects",
+      "url": "/#projects",
+      "icons": [{ "src": "/android-chrome-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch with Yasin",
+      "url": "/#contact",
+      "icons": [{ "src": "/android-chrome-192x192.png", "sizes": "192x192" }]
     }
   ]
 }
