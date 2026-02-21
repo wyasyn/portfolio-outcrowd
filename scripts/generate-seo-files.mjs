@@ -19,12 +19,6 @@ async function run() {
   const siteUrl = normalizeSiteUrl(env.VITE_SITE_URL);
   const today = new Date().toISOString().slice(0, 10);
 
-  const robotsTxt = `User-agent: *
-Allow: /
-
-Sitemap: ${siteUrl}/sitemap.xml
-`;
-
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -38,10 +32,7 @@ Sitemap: ${siteUrl}/sitemap.xml
 
   const publicDir = path.join(process.cwd(), "public");
   await mkdir(publicDir, { recursive: true });
-  await Promise.all([
-    writeFile(path.join(publicDir, "robots.txt"), robotsTxt, "utf8"),
-    writeFile(path.join(publicDir, "sitemap.xml"), sitemapXml, "utf8"),
-  ]);
+  await writeFile(path.join(publicDir, "sitemap.xml"), sitemapXml, "utf8");
 
   if (siteUrl === "https://example.com") {
     console.warn("SEO warning: set VITE_SITE_URL in .env to your real domain.");

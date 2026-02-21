@@ -19,11 +19,9 @@ async function run() {
   const errors = [];
 
   const indexPath = await fileMustExist("index.html").catch(() => null);
-  const robotsPath = await fileMustExist("robots.txt").catch(() => null);
   const sitemapPath = await fileMustExist("sitemap.xml").catch(() => null);
 
   if (!indexPath) errors.push("Missing dist/index.html. Run build before SEO QA.");
-  if (!robotsPath) errors.push("Missing dist/robots.txt. Ensure seo:generate runs before build.");
   if (!sitemapPath) errors.push("Missing dist/sitemap.xml. Ensure seo:generate runs before build.");
 
   if (indexPath) {
@@ -48,13 +46,6 @@ async function run() {
     if (/%VITE_SITE_URL%/.test(html)) {
       errors.push("Unresolved %VITE_SITE_URL% placeholder in dist/index.html.");
     }
-  }
-
-  if (robotsPath) {
-    const robots = await readFile(robotsPath, "utf8");
-    assertMatch(robots, /User-agent:\s*\*/i, "robots.txt missing User-agent.", errors);
-    assertMatch(robots, /Allow:\s*\//i, "robots.txt missing Allow directive.", errors);
-    assertMatch(robots, /Sitemap:\s*https?:\/\/\S+/i, "robots.txt missing absolute Sitemap URL.", errors);
   }
 
   if (sitemapPath) {
