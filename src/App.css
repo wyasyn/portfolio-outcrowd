@@ -423,26 +423,26 @@
   border-right: 1px solid #dfe2ea;
   background: #fbfcff;
   box-shadow: 20px 0 36px rgb(0 0 0 / 18%);
-  padding: 0.7rem;
-  display: grid;
-  grid-template-rows: auto auto auto auto;
-  align-content: start;
-  gap: 0.65rem;
+  padding: 0.85rem 0.7rem 0.75rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .mobile-drawer-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 0.9rem;
 }
 
 .mobile-close {
-  border: 1px solid #dee3f0;
-  background: #f5f8ff;
+  border: 0;
+  background: transparent;
   color: #2e3442;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 0;
+  padding: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -452,6 +452,7 @@
 .mobile-nav-links {
   display: grid;
   gap: 0.45rem;
+  align-content: start;
 }
 
 .mobile-nav-links a,
@@ -479,6 +480,13 @@
   gap: 0.42rem;
 }
 
+.mobile-drawer-footer {
+  margin-top: auto;
+  display: grid;
+  gap: 0.62rem;
+  padding-top: 0.8rem;
+}
+
 .mobile-theme-pill {
   border-radius: 10px;
   border: 1px solid #e0e5f2;
@@ -500,7 +508,6 @@
 
 .mobile-nav-cta {
   width: 100%;
-  align-self: start;
 }
 
 .hero-section {
@@ -1905,8 +1912,7 @@
 }
 
 [data-theme="dark"] .mobile-close {
-  background: #343a46;
-  border-color: #49505f;
+  background: transparent;
   color: #e9edf4;
 }
 

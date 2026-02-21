@@ -73,29 +73,31 @@ export function MobileDrawer({
               ))}
             </nav>
 
-            <div className="mobile-theme-row" role="group" aria-label="Theme mode">
-              {THEME_OPTIONS.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  className={`mobile-theme-pill ${themeMode === option.value ? 'is-selected' : ''}`}
-                  onClick={() => onThemeSelect(option.value)}
-                >
-                  <span>{option.emoji}</span>
-                  <span>{option.triggerLabel}</span>
-                </button>
-              ))}
-            </div>
+            <div className="mobile-drawer-footer">
+              <div className="mobile-theme-row" role="group" aria-label="Theme mode">
+                {THEME_OPTIONS.map((option) => (
+                  <button
+                    key={option.value}
+                    type="button"
+                    className={`mobile-theme-pill ${themeMode === option.value ? 'is-selected' : ''}`}
+                    onClick={() => onThemeSelect(option.value)}
+                  >
+                    <span>{option.emoji}</span>
+                    <span>{option.triggerLabel}</span>
+                  </button>
+                ))}
+              </div>
 
-            <Button
-              className="mobile-nav-cta"
-              onClick={() => {
-                onCtaClick?.();
-                onClose();
-              }}
-            >
-              {ctaLabel}
-            </Button>
+              <Button
+                className="mobile-nav-cta"
+                onClick={() => {
+                  onCtaClick?.();
+                  onClose();
+                }}
+              >
+                {ctaLabel}
+              </Button>
+            </div>
           </motion.aside>
         </motion.div>
       ) : null}
