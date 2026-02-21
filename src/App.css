@@ -639,6 +639,8 @@
   padding: 0.95rem 1rem;
   display: grid;
   gap: 0.58rem;
+  container-type: inline-size;
+  container-name: workspace-window;
   background: linear-gradient(
     180deg,
     rgb(255 255 255 / 14%) 0%,
@@ -1422,6 +1424,74 @@
 
 .workspace-window.is-minimized .workspace-window-body {
   display: none;
+}
+
+@container workspace-window (max-width: 480px) {
+  .about-window-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-sidebar {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .about-sidebar-head {
+    align-self: center;
+  }
+
+  .about-quick-facts {
+    grid-column: 1 / -1;
+  }
+
+  .about-social-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-master-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .project-list {
+    max-height: 180px;
+  }
+
+  .contact-window {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-field textarea {
+    min-height: 130px;
+  }
+}
+
+@container workspace-window (max-width: 360px) {
+  .about-panel,
+  .projects-intro,
+  .project-list,
+  .project-story-card,
+  .contact-side,
+  .contact-form {
+    padding: 0.68rem;
+  }
+
+  .about-tab {
+    font-size: 0.72rem;
+    padding: 0.34rem 0.54rem;
+  }
+
+  .project-story-image {
+    height: 128px;
+  }
+
+  .contact-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .contact-card-arrow {
+    display: none;
+  }
 }
 
 [data-theme="dark"] .hero-frame {
@@ -2330,48 +2400,6 @@
     max-height: calc(100% - 0.75rem);
     min-width: 250px;
     min-height: 200px;
-  }
-
-  .about-window-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .about-sidebar {
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 0.7rem;
-  }
-
-  .about-sidebar-head {
-    align-self: center;
-  }
-
-  .about-quick-facts {
-    grid-column: 1 / -1;
-  }
-
-  .about-social-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .project-master-detail {
-    grid-template-columns: 1fr;
-  }
-
-  .project-list {
-    max-height: 180px;
-  }
-
-  .contact-window {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-form {
-    grid-template-rows: auto auto auto auto;
-  }
-
-  .contact-field textarea {
-    min-height: 130px;
   }
 }
 
