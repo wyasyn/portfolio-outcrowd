@@ -11,7 +11,7 @@ export function ProjectsWindowContent() {
     CASE_STUDIES.find((study) => study.title === activeProjectTitle) ?? null;
 
   return (
-    <section className="projects-window">
+    <section className={`projects-window${activeProject ? ' is-detail' : ''}`}>
       {!activeProject ? (
         <header className="projects-intro">
           <h4>Case Studies</h4>

@@ -1098,6 +1098,26 @@
   margin-bottom: 0.9rem;
 }
 
+.projects-window.is-detail {
+  border-radius: 11px;
+  background: linear-gradient(
+    180deg,
+    rgb(249 251 255 / 82%) 0%,
+    rgb(243 247 252 / 66%) 100%
+  );
+  padding: 0.72rem;
+}
+
+.projects-window.is-detail .project-detail-view {
+  margin-bottom: 0;
+}
+
+.projects-window.is-detail .project-story-card {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
 .project-back-button {
   width: fit-content;
   border: none;
@@ -1820,6 +1840,14 @@
 
 [data-theme="dark"] .project-story-card {
   border-color: rgb(71 81 99 / 76%);
+  background: linear-gradient(
+    180deg,
+    rgb(41 46 57 / 77%) 0%,
+    rgb(34 39 49 / 66%) 100%
+  );
+}
+
+[data-theme="dark"] .projects-window.is-detail {
   background: linear-gradient(
     180deg,
     rgb(41 46 57 / 77%) 0%,
