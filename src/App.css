@@ -1461,8 +1461,23 @@
     grid-template-columns: 1fr;
   }
 
+  .contact-form {
+    grid-template-columns: 1fr;
+    gap: 0.58rem;
+  }
+
   .contact-field textarea {
     min-height: 130px;
+  }
+
+  .contact-submit {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .contact-submit-message,
+  .contact-success-toast {
+    width: 100%;
   }
 }
 
@@ -1491,6 +1506,20 @@
 
   .contact-card-arrow {
     display: none;
+  }
+
+  .contact-field span {
+    font-size: 0.62rem;
+  }
+
+  .contact-field input,
+  .contact-field textarea,
+  .contact-submit {
+    font-size: 0.76rem;
+  }
+
+  .contact-field textarea {
+    min-height: 112px;
   }
 }
 
