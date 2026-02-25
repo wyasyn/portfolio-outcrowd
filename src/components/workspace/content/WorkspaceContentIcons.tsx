@@ -7,7 +7,7 @@ import {
   Location01Icon,
   Mail01Icon,
   YoutubeIcon,
-} from "@hugeicons/core-free-icons";
+} from '@hugeicons/core-free-icons';
 import type { SocialKey } from '../../../data/workspaceData';
 import { Icon } from '../../ui/Icon';
 
