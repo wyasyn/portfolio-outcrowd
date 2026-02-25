@@ -29,7 +29,14 @@ type HeroDecorationsProps = {
   dragConstraints: RefObject<HTMLElement | null>;
 };
 
-function AnimatedCard({ children, className, floatY, rotate, delay, dragConstraints }: AnimatedCardProps) {
+function AnimatedCard({
+  children,
+  className,
+  floatY,
+  rotate,
+  delay,
+  dragConstraints,
+}: AnimatedCardProps) {
   return (
     <motion.article
       className={`floating-card ${className}`}
@@ -74,7 +81,13 @@ function AnimatedCard({ children, className, floatY, rotate, delay, dragConstrai
 
 function StickyNoteCard({ dragConstraints }: HeroDecorationsProps) {
   return (
-    <AnimatedCard className="sticky-note-card" floatY={4} rotate={4} delay={0.1} dragConstraints={dragConstraints}>
+    <AnimatedCard
+      className="sticky-note-card"
+      floatY={4}
+      rotate={4}
+      delay={0.1}
+      dragConstraints={dragConstraints}
+    >
       <span className="pin-head" aria-hidden />
       <Icon icon={PinLocation01Icon} size={12} className="pin-icon" />
       <p>Ship clear UI. Keep every detail sharp.</p>
@@ -87,7 +100,13 @@ function StickyNoteCard({ dragConstraints }: HeroDecorationsProps) {
 
 function ReminderCard({ dragConstraints }: HeroDecorationsProps) {
   return (
-    <AnimatedCard className="reminder-card" floatY={5} rotate={7} delay={0.2} dragConstraints={dragConstraints}>
+    <AnimatedCard
+      className="reminder-card"
+      floatY={5}
+      rotate={7}
+      delay={0.2}
+      dragConstraints={dragConstraints}
+    >
       <div className="reminder-clock" aria-hidden>
         <Icon icon={Clock01Icon} size={18} />
       </div>
@@ -122,7 +141,13 @@ function ProgressRow({ title, progress }: TaskProgressProps) {
 
 function TasksCard({ dragConstraints }: HeroDecorationsProps) {
   return (
-    <AnimatedCard className="tasks-card" floatY={6} rotate={-2} delay={0.25} dragConstraints={dragConstraints}>
+    <AnimatedCard
+      className="tasks-card"
+      floatY={6}
+      rotate={-2}
+      delay={0.25}
+      dragConstraints={dragConstraints}
+    >
       <div className="tasks-header">
         <Icon icon={Task01Icon} size={16} />
         <p>Today&apos;s focus</p>
@@ -135,7 +160,13 @@ function TasksCard({ dragConstraints }: HeroDecorationsProps) {
 
 function IntegrationCard({ dragConstraints }: HeroDecorationsProps) {
   return (
-    <AnimatedCard className="integrations-card" floatY={5} rotate={4} delay={0.3} dragConstraints={dragConstraints}>
+    <AnimatedCard
+      className="integrations-card"
+      floatY={5}
+      rotate={4}
+      delay={0.3}
+      dragConstraints={dragConstraints}
+    >
       <p>Frontend Stack</p>
       <div className="integration-icons">
         <span className="integration-tile">

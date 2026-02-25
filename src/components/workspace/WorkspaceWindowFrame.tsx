@@ -10,7 +10,10 @@ type WorkspaceWindowFrameProps = {
   onClose: (id: number) => void;
   onMinimize: (id: number) => void;
   onMaximize: (id: number) => void;
-  onUpdateRect: (id: number, rect: Partial<Pick<AppWindow, 'width' | 'height' | 'left' | 'top'>>) => void;
+  onUpdateRect: (
+    id: number,
+    rect: Partial<Pick<AppWindow, 'width' | 'height' | 'left' | 'top'>>,
+  ) => void;
   children: ReactNode;
 };
 
@@ -89,7 +92,11 @@ export function WorkspaceWindowFrame({
         width = clamp(startRight - left, minWidth, Math.max(minWidth, bounds.width - left - pad));
       }
       if (direction.includes('n')) {
-        height = clamp(startBottom - top, minHeight, Math.max(minHeight, bounds.height - top - pad));
+        height = clamp(
+          startBottom - top,
+          minHeight,
+          Math.max(minHeight, bounds.height - top - pad),
+        );
       }
 
       onUpdateRect(windowItem.id, {

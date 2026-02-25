@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
+import { useThemeMode } from '../../hooks/useThemeMode';
 import { motion } from 'motion/react';
 import { useShallow } from 'zustand/react/shallow';
-import { useNavStore, type ThemeMode } from '../../stores/navStore';
+import { useNavStore } from '../../stores/navStore';
 import { useWorkspaceStore } from '../../stores/workspaceStore';
 import { Button } from '../ui/Button';
 import { BrandMark } from './BrandMark';
@@ -16,11 +17,6 @@ type TopNavProps = {
   onItemSelect?: (item: string) => void;
   onCtaClick?: () => void;
 };
-
-function getResolvedTheme(mode: ThemeMode): 'light' | 'dark' {
-  if (mode !== 'system') return mode;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
 
 export function TopNav({ items, brandName, ctaLabel, onItemSelect, onCtaClick }: TopNavProps) {
   const {
@@ -60,24 +56,7 @@ export function TopNav({ items, brandName, ctaLabel, onItemSelect, onCtaClick }:
     return activeKind;
   });
 
-  useEffect(() => {
-    const root = document.documentElement;
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-    const apply = (mode: ThemeMode) => {
-      root.dataset.theme = getResolvedTheme(mode);
-      root.dataset.themeMode = mode;
-      localStorage.setItem('theme-mode', mode);
-    };
-
-    apply(themeMode);
-
-    if (themeMode !== 'system') return;
-
-    const handleChange = () => apply('system');
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [themeMode]);
+  useThemeMode(themeMode);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {

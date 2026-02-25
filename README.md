@@ -59,7 +59,13 @@ pnpm dev
 - `pnpm seo:generate` - generate `public/robots.txt` and `public/sitemap.xml`
 - `pnpm build` - generate SEO files, type-check, and build production assets
 - `pnpm seo:qa` - validate SEO-critical output in `dist/`
-- `pnpm ci:seo` - run build + SEO QA (CI-friendly)
+- `pnpm env:check:prod` - validate required production environment variables
+- `pnpm format` - format files with Prettier
+- `pnpm format:check` - verify Prettier formatting
+- `pnpm test:unit` - run unit tests for workspace and contact form logic
+- `pnpm ci:bundle` - run build and enforce bundle-size budgets
+- `pnpm ci:quality` - run format/lint/tests and bundle budgets
+- `pnpm ci:seo` - run env check + build + SEO QA (CI-friendly)
 - `pnpm preview` - preview production build locally
 
 ## SEO Notes

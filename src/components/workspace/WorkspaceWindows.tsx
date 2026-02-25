@@ -78,7 +78,10 @@ export function WorkspaceWindows() {
     });
   };
 
-  const onUpdateRect = (id: number, rect: { width?: number; height?: number; left?: number; top?: number }) => {
+  const onUpdateRect = (
+    id: number,
+    rect: { width?: number; height?: number; left?: number; top?: number },
+  ) => {
     const layer = layerRef.current;
     if (!layer) return;
     const bounds = layer.getBoundingClientRect();
