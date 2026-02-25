@@ -1,12 +1,12 @@
 import type { ReactNode, RefObject } from 'react';
 import {
-  DartIcon,
   CheckmarkSquare01Icon,
   Clock01Icon,
   PinLocation01Icon,
   PythonIcon,
   ReactIcon,
   Task01Icon,
+  SmartWatch04Icon,
 } from '@hugeicons/core-free-icons';
 import { motion } from 'motion/react';
 import { Icon } from './ui/Icon';
@@ -173,7 +173,7 @@ function IntegrationCard({ dragConstraints }: HeroDecorationsProps) {
           <Icon icon={ReactIcon} size={25} />
         </span>
         <span className="integration-tile">
-          <Icon icon={DartIcon} size={25} />
+          <Icon icon={SmartWatch04Icon} size={25} />
         </span>
         <span className="integration-tile">
           <Icon icon={PythonIcon} size={25} />
