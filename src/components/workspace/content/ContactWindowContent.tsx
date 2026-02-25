@@ -2,7 +2,6 @@ import { MailSend01Icon } from '@hugeicons/core-free-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import {
   CONTACT_EMAIL,
   CONTACT_FORM_ENDPOINT,
@@ -18,21 +17,8 @@ import {
   buildContactPayload,
   contactFormSchema,
   shouldThrottleSubmission,
-  type ContactFormValues,
 } from './contactFormLogic';
-
-const contactFormSchema = z.object({
-  name: z.string().trim().min(2, 'Please enter at least 2 characters for your name.'),
-  email: z.email('Please enter a valid email address.'),
-  message: z
-    .string()
-    .trim()
-    .min(10, 'Please share at least a short message (10+ characters).')
-    .max(1000, 'Message is too long. Keep it under 1000 characters.'),
-  company: z.string().trim().max(0).optional(),
-});
-
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+import type { ContactFormValues } from './contactFormLogic';
 
 export function ContactWindowContent() {
   const [submitError, setSubmitError] = useState('');
@@ -67,7 +53,6 @@ export function ContactWindowContent() {
     setSubmitError('');
     const now = Date.now();
     if (shouldThrottleSubmission(lastSubmitAtRef.current, now)) {
-    if (now - lastSubmitAtRef.current < 8000) {
       setSubmitError('Please wait a few seconds before sending another message.');
       return;
     }
@@ -89,14 +74,7 @@ export function ContactWindowContent() {
         credentials: 'omit',
         referrerPolicy: 'strict-origin-when-cross-origin',
         signal: controller.signal,
-        body: JSON.stringify({
-          name: values.name,
-          email: values.email,
-          message: values.message,
-          _subject: `Portfolio inquiry from ${values.name}`,
-          _captcha: 'false',
-          _template: 'table',
-        }),
+        body: JSON.stringify(buildContactPayload(values)),
       });
       window.clearTimeout(timeoutId);
 
@@ -192,15 +170,25 @@ export function ContactWindowContent() {
       >
         <label className={`contact-field${errors.name ? ' has-error' : ''}`} htmlFor="contact-name">
           <span>Name</span>
-          <input
-            id="contact-name"
-            type="text"
-            placeholder="Your Name"
-            autoComplete="name"
-            aria-invalid={errors.name ? 'true' : 'false'}
-            aria-describedby={errors.name ? 'contact-name-error' : undefined}
-            {...register('name')}
-          />
+          {errors.name ? (
+            <input
+              id="contact-name"
+              type="text"
+              placeholder="Your Name"
+              autoComplete="name"
+              aria-invalid="true"
+              aria-describedby="contact-name-error"
+              {...register('name')}
+            />
+          ) : (
+            <input
+              id="contact-name"
+              type="text"
+              placeholder="Your Name"
+              autoComplete="name"
+              {...register('name')}
+            />
+          )}
           {errors.name ? (
             <small id="contact-name-error" className="contact-field-error">
               {errors.name.message}
@@ -213,15 +201,25 @@ export function ContactWindowContent() {
           htmlFor="contact-email"
         >
           <span>Email</span>
-          <input
-            id="contact-email"
-            type="email"
-            placeholder="Your Email Address"
-            autoComplete="email"
-            aria-invalid={errors.email ? 'true' : 'false'}
-            aria-describedby={errors.email ? 'contact-email-error' : undefined}
-            {...register('email')}
-          />
+          {errors.email ? (
+            <input
+              id="contact-email"
+              type="email"
+              placeholder="Your Email Address"
+              autoComplete="email"
+              aria-invalid="true"
+              aria-describedby="contact-email-error"
+              {...register('email')}
+            />
+          ) : (
+            <input
+              id="contact-email"
+              type="email"
+              placeholder="Your Email Address"
+              autoComplete="email"
+              {...register('email')}
+            />
+          )}
           {errors.email ? (
             <small id="contact-email-error" className="contact-field-error">
               {errors.email.message}
@@ -234,15 +232,25 @@ export function ContactWindowContent() {
           htmlFor="contact-message"
         >
           <span>Message</span>
-          <textarea
-            id="contact-message"
-            placeholder="Tell me about your project..."
-            rows={8}
-            autoComplete="off"
-            aria-invalid={errors.message ? 'true' : 'false'}
-            aria-describedby={errors.message ? 'contact-message-error' : undefined}
-            {...register('message')}
-          />
+          {errors.message ? (
+            <textarea
+              id="contact-message"
+              placeholder="Tell me about your project..."
+              rows={8}
+              autoComplete="off"
+              aria-invalid="true"
+              aria-describedby="contact-message-error"
+              {...register('message')}
+            />
+          ) : (
+            <textarea
+              id="contact-message"
+              placeholder="Tell me about your project..."
+              rows={8}
+              autoComplete="off"
+              {...register('message')}
+            />
+          )}
           {errors.message ? (
             <small id="contact-message-error" className="contact-field-error">
               {errors.message.message}

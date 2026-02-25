@@ -17,7 +17,6 @@
     "test:unit": "node scripts/run-unit-tests.mjs",
     "ci:bundle": "pnpm build && node scripts/check-bundle-budgets.mjs",
     "ci:quality": "pnpm format:check && pnpm lint && pnpm test:unit && pnpm ci:bundle"
-    "env:check:prod": "node scripts/check-required-env.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -40,6 +39,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "prettier": "^3.8.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
     "vite": "^7.3.1"
