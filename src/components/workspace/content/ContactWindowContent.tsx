@@ -14,6 +14,12 @@ import {
 } from '../../../data/workspaceData';
 import { Icon } from '../../ui/Icon';
 import { ContactIcon } from './WorkspaceContentIcons';
+import {
+  buildContactPayload,
+  contactFormSchema,
+  shouldThrottleSubmission,
+  type ContactFormValues,
+} from './contactFormLogic';
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(2, 'Please enter at least 2 characters for your name.'),
@@ -60,6 +66,7 @@ export function ContactWindowContent() {
   const onSubmit = async (values: ContactFormValues) => {
     setSubmitError('');
     const now = Date.now();
+    if (shouldThrottleSubmission(lastSubmitAtRef.current, now)) {
     if (now - lastSubmitAtRef.current < 8000) {
       setSubmitError('Please wait a few seconds before sending another message.');
       return;

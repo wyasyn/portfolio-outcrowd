@@ -1,11 +1,9 @@
 import { MotionConfig } from 'motion/react';
 import { useShallow } from 'zustand/react/shallow';
 import './App.css';
-import { NAV_ITEMS } from './data/navigationData';
+import { NAV_ITEMS, TopNav } from './features/navigation';
 import { HeroSection } from './components/HeroSection';
-import { TopNav } from './components/TopNav';
-import { useWorkspaceStore } from './stores/workspaceStore';
-import type { WindowKind } from './types/workspace';
+import { useWorkspaceStore, type WindowKind } from './features/workspace';
 
 export default function App() {
   const { requestWindow, closeAllWindows } = useWorkspaceStore(
