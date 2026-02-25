@@ -1,14 +1,11 @@
-import { useState } from "react";
-import { ArrowLeft01Icon } from "@hugeicons/core-free-icons";
-import { CASE_STUDIES } from "../../../data/workspaceData";
-import { Icon } from "../../ui/Icon";
+import { useState } from 'react';
+import { ArrowLeft01Icon } from '@hugeicons/core-free-icons';
+import { CASE_STUDIES } from '../../../data/workspaceData';
+import { Icon } from '../../ui/Icon';
 
 export function ProjectsWindowContent() {
-  const [activeProjectTitle, setActiveProjectTitle] = useState<string | null>(
-    null,
-  );
-  const activeProject =
-    CASE_STUDIES.find((study) => study.title === activeProjectTitle) ?? null;
+  const [activeProjectTitle, setActiveProjectTitle] = useState<string | null>(null);
+  const activeProject = CASE_STUDIES.find((study) => study.title === activeProjectTitle) ?? null;
 
   return (
     <section className={`projects-window${activeProject ? ' is-detail' : ''}`}>
@@ -16,9 +13,8 @@ export function ProjectsWindowContent() {
         <header className="projects-intro">
           <h4>Case Studies</h4>
           <p>
-            I turn complex product workflows into clear, reliable interfaces. My
-            strength is research, planning, and shipping fast frontend
-            experiences.
+            I turn complex product workflows into clear, reliable interfaces. My strength is
+            research, planning, and shipping fast frontend experiences.
           </p>
         </header>
       ) : null}
@@ -53,20 +49,12 @@ export function ProjectsWindowContent() {
             {(activeProject.githubUrl || activeProject.liveUrl) && (
               <div className="project-story-links">
                 {activeProject.githubUrl ? (
-                  <a
-                    href={activeProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={activeProject.githubUrl} target="_blank" rel="noopener noreferrer">
                     GitHub
                   </a>
                 ) : null}
                 {activeProject.liveUrl ? (
-                  <a
-                    href={activeProject.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a href={activeProject.liveUrl} target="_blank" rel="noopener noreferrer">
                     Live Site
                   </a>
                 ) : null}
