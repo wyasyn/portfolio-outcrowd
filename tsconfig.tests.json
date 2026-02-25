@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "outDir": ".tmp-tests",
+    "rootDir": ".",
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "verbatimModuleSyntax": true
+  },
+  "include": [
+    "tests/**/*.ts",
+    "src/stores/workspaceLayout.ts",
+    "src/components/workspace/content/contactFormLogic.ts"
+  ]
+}
