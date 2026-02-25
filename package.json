@@ -17,6 +17,7 @@
     "test:unit": "node scripts/run-unit-tests.mjs",
     "ci:bundle": "pnpm build && node scripts/check-bundle-budgets.mjs",
     "ci:quality": "pnpm format:check && pnpm lint && pnpm test:unit && pnpm ci:bundle"
+    "env:check:prod": "node scripts/check-required-env.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

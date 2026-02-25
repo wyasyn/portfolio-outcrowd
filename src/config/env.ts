@@ -8,11 +8,9 @@ const httpUrlSchema = z
     message: 'must be an https URL',
   });
 
-const emailSchema = z.string().trim().email();
-
 const envSchema = z.object({
   VITE_SITE_URL: z.string().trim().optional(),
-  VITE_CONTACT_EMAIL: z.string().trim().optional(),
+  VITE_CONTACT_EMAIL: z.string().trim().email().optional(),
   VITE_CONTACT_PHONE_DISPLAY: z.string().trim().optional(),
   VITE_CONTACT_WHATSAPP: z.string().trim().optional(),
   VITE_CONTACT_LOCATION_LABEL: z.string().trim().optional(),
@@ -38,16 +36,9 @@ function normalizeSiteUrl(siteUrl: string | undefined): string {
   return result.data.replace(/\/$/, '');
 }
 
-function normalizeOptionalEmail(email: string | undefined): string | undefined {
-  if (!email) return undefined;
-  const result = emailSchema.safeParse(email);
-  if (!result.success) return undefined;
-  return result.data;
-}
-
 export const appEnv = {
   siteUrl: normalizeSiteUrl(parsedEnv.VITE_SITE_URL),
-  contactEmail: normalizeOptionalEmail(parsedEnv.VITE_CONTACT_EMAIL) ?? DEFAULTS.contactEmail,
+  contactEmail: parsedEnv.VITE_CONTACT_EMAIL ?? DEFAULTS.contactEmail,
   contactPhoneDisplay: parsedEnv.VITE_CONTACT_PHONE_DISPLAY ?? DEFAULTS.contactPhoneDisplay,
   contactWhatsapp: parsedEnv.VITE_CONTACT_WHATSAPP ?? DEFAULTS.contactWhatsapp,
   contactLocationLabel: parsedEnv.VITE_CONTACT_LOCATION_LABEL ?? DEFAULTS.contactLocationLabel,

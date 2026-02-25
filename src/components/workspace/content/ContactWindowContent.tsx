@@ -2,6 +2,7 @@ import { MailSend01Icon } from '@hugeicons/core-free-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 import {
   CONTACT_EMAIL,
   CONTACT_FORM_ENDPOINT,
@@ -19,6 +20,19 @@ import {
   shouldThrottleSubmission,
   type ContactFormValues,
 } from './contactFormLogic';
+
+const contactFormSchema = z.object({
+  name: z.string().trim().min(2, 'Please enter at least 2 characters for your name.'),
+  email: z.email('Please enter a valid email address.'),
+  message: z
+    .string()
+    .trim()
+    .min(10, 'Please share at least a short message (10+ characters).')
+    .max(1000, 'Message is too long. Keep it under 1000 characters.'),
+  company: z.string().trim().max(0).optional(),
+});
+
+type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 export function ContactWindowContent() {
   const [submitError, setSubmitError] = useState('');
@@ -53,6 +67,7 @@ export function ContactWindowContent() {
     setSubmitError('');
     const now = Date.now();
     if (shouldThrottleSubmission(lastSubmitAtRef.current, now)) {
+    if (now - lastSubmitAtRef.current < 8000) {
       setSubmitError('Please wait a few seconds before sending another message.');
       return;
     }
@@ -74,7 +89,14 @@ export function ContactWindowContent() {
         credentials: 'omit',
         referrerPolicy: 'strict-origin-when-cross-origin',
         signal: controller.signal,
-        body: JSON.stringify(buildContactPayload(values)),
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          message: values.message,
+          _subject: `Portfolio inquiry from ${values.name}`,
+          _captcha: 'false',
+          _template: 'table',
+        }),
       });
       window.clearTimeout(timeoutId);
 
