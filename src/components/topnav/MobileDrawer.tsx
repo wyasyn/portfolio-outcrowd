@@ -80,7 +80,12 @@ export function MobileDrawer({
                 <BrandMark />
                 <span>{brandName}</span>
               </a>
-              <button className="mobile-close" type="button" aria-label="Close menu" onClick={onClose}>
+              <button
+                className="mobile-close"
+                type="button"
+                aria-label="Close menu"
+                onClick={onClose}
+              >
                 <Icon icon={Cancel01Icon} size={18} />
               </button>
             </div>

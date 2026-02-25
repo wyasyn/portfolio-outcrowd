@@ -1,5 +1,10 @@
 import { useState, type KeyboardEvent } from 'react';
-import { ABOUT_TABS, SOCIAL_LINKS, type AboutTab, type SocialKey } from '../../../data/workspaceData';
+import {
+  ABOUT_TABS,
+  SOCIAL_LINKS,
+  type AboutTab,
+  type SocialKey,
+} from '../../../data/workspaceData';
 import { SocialIcon } from './WorkspaceContentIcons';
 
 const ABOUT_AVATAR_SRC_1X =
@@ -10,14 +15,20 @@ const ABOUT_AVATAR_SRC_2X =
 export function AboutWindowContent() {
   const [activeTab, setActiveTab] = useState<AboutTab>('profile');
   const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
-    if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft' && event.key !== 'Home' && event.key !== 'End') {
+    if (
+      event.key !== 'ArrowRight' &&
+      event.key !== 'ArrowLeft' &&
+      event.key !== 'Home' &&
+      event.key !== 'End'
+    ) {
       return;
     }
     event.preventDefault();
 
     let targetIndex = index;
     if (event.key === 'ArrowRight') targetIndex = (index + 1) % ABOUT_TABS.length;
-    if (event.key === 'ArrowLeft') targetIndex = (index - 1 + ABOUT_TABS.length) % ABOUT_TABS.length;
+    if (event.key === 'ArrowLeft')
+      targetIndex = (index - 1 + ABOUT_TABS.length) % ABOUT_TABS.length;
     if (event.key === 'Home') targetIndex = 0;
     if (event.key === 'End') targetIndex = ABOUT_TABS.length - 1;
 
@@ -93,17 +104,18 @@ export function AboutWindowContent() {
             <>
               <h4>About Me</h4>
               <p>
-                I am Yasin Walum, a Ugandan living in Kampala. I studied Computer Science and also studied Mathematics
-                and Physics.
+                I am Yasin Walum, a Ugandan living in Kampala. I studied Computer Science and also
+                studied Mathematics and Physics.
               </p>
               <p>
-                I worked as a Mathematics and Physics teacher from 2014 to 2019, then moved into frontend development
-                in 2020 and have been building modern web interfaces since then.
+                I worked as a Mathematics and Physics teacher from 2014 to 2019, then moved into
+                frontend development in 2020 and have been building modern web interfaces since
+                then.
               </p>
               <p>
-                I currently work at EzyAgric on the Farm Manager app as a Frontend Developer, where I improve product
-                usability, build reliable interfaces for field workflows, and help the team deliver measurable product
-                outcomes that are reflected in this portfolio.
+                I currently work at EzyAgric on the Farm Manager app as a Frontend Developer, where
+                I improve product usability, build reliable interfaces for field workflows, and help
+                the team deliver measurable product outcomes that are reflected in this portfolio.
               </p>
             </>
           )}
@@ -134,8 +146,8 @@ export function AboutWindowContent() {
                 <span>Current Role</span>
                 <h5>Frontend Developer at EzyAgric (Farm Manager)</h5>
                 <p>
-                  Driving product quality through clear UX, faster iteration cycles, and features that support daily
-                  operations in agriculture.
+                  Driving product quality through clear UX, faster iteration cycles, and features
+                  that support daily operations in agriculture.
                 </p>
               </article>
             </div>
@@ -161,14 +173,12 @@ export function AboutWindowContent() {
               <p>Find me on social platforms and follow my work.</p>
               <div className="about-social-grid">
                 {SOCIAL_LINKS.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">
                     <span className="about-social-title">
-                      <i className={`about-social-icon about-social-${link.key}`} aria-hidden="true">
+                      <i
+                        className={`about-social-icon about-social-${link.key}`}
+                        aria-hidden="true"
+                      >
                         <SocialIcon platform={link.key as SocialKey} />
                       </i>
                       {link.label}

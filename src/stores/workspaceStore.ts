@@ -62,7 +62,9 @@ export const useWorkspaceStore = create<WorkspaceState>((set) => ({
         return {
           zIndex: nextZ,
           windows: state.windows.map((windowItem) =>
-            windowItem.id === existing.id ? { ...windowItem, zIndex: nextZ, minimized: false } : windowItem,
+            windowItem.id === existing.id
+              ? { ...windowItem, zIndex: nextZ, minimized: false }
+              : windowItem,
           ),
         };
       }
@@ -203,8 +205,16 @@ export const useWorkspaceStore = create<WorkspaceState>((set) => ({
           minSize.height,
           Math.max(minSize.height, bounds.height - 24),
         );
-        const nextLeft = clamp(rect.left ?? windowItem.left, 12, Math.max(12, bounds.width - nextWidth - 12));
-        const nextTop = clamp(rect.top ?? windowItem.top, 12, Math.max(12, bounds.height - nextHeight - 12));
+        const nextLeft = clamp(
+          rect.left ?? windowItem.left,
+          12,
+          Math.max(12, bounds.width - nextWidth - 12),
+        );
+        const nextTop = clamp(
+          rect.top ?? windowItem.top,
+          12,
+          Math.max(12, bounds.height - nextHeight - 12),
+        );
 
         return {
           ...windowItem,

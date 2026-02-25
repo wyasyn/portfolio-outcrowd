@@ -23,7 +23,8 @@ export function ThemePicker({
   const themePickerId = useId();
   const triggerId = `${themePickerId}-trigger`;
   const panelId = `${themePickerId}-panel`;
-  const activeThemeOption = THEME_OPTIONS.find((option) => option.value === themeMode) ?? THEME_OPTIONS[2];
+  const activeThemeOption =
+    THEME_OPTIONS.find((option) => option.value === themeMode) ?? THEME_OPTIONS[2];
 
   return (
     <div className="theme-picker" ref={themePickerRef}>

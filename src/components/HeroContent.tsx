@@ -1,7 +1,7 @@
-import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
-import { motion } from "motion/react";
-import { Button } from "./ui/Button";
-import { Icon } from "./ui/Icon";
+import { ArrowRight01Icon } from '@hugeicons/core-free-icons';
+import { motion } from 'motion/react';
+import { Button } from './ui/Button';
+import { Icon } from './ui/Icon';
 
 type HeroContentProps = {
   onExploreClick?: () => void;
@@ -48,7 +48,7 @@ export function HeroContent({ onExploreClick }: HeroContentProps) {
           hidden: { opacity: 0, y: 14 },
           visible: { opacity: 1, y: 0 },
         }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
+        transition={{ duration: 0.45, ease: 'easeOut' }}
       >
         Design, build, ship
         <span>build bold web experiences</span>
@@ -58,7 +58,7 @@ export function HeroContent({ onExploreClick }: HeroContentProps) {
           hidden: { opacity: 0, y: 10 },
           visible: { opacity: 1, y: 0 },
         }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         Frontend developer in Kampala. Fast. Clean. Accessible.
       </motion.p>
@@ -67,7 +67,7 @@ export function HeroContent({ onExploreClick }: HeroContentProps) {
           hidden: { opacity: 0, y: 8 },
           visible: { opacity: 1, y: 0 },
         }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.98 }}
       >
