@@ -8,9 +8,12 @@
     "seo:generate": "node scripts/generate-seo-files.mjs",
     "seo:qa": "node scripts/seo-qa.mjs",
     "build": "pnpm seo:generate && tsc -b && vite build",
-    "ci:seo": "pnpm build && pnpm seo:qa",
+    "ci:seo": "pnpm env:check:prod && pnpm build && pnpm seo:qa",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "env:check:prod": "node scripts/check-required-env.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
